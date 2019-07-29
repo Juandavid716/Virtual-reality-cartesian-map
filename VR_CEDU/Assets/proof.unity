@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -118,6 +118,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd,
     type: 2}
   m_PrefabInternal: {fileID: 1371757113}
+--- !u!114 &24509802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 24509801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d6f3d5154fcba48938e27944e04691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LineaMaterial: {fileID: 2100000, guid: ffa1bb3afcf08a74ca9f97ea8345bce3, type: 2}
+  ancho: 0.2
+  profundidad: 10
+--- !u!20 &24509803
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 24509801}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!4 &24509806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd,
@@ -523,8 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffe6c14f054b624d8a61df503f21c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_targetedCrosshair: {fileID: 688866269}
-  m_enabledCrosshair: {fileID: 1682040729}
+  m_targetedCrosshair: {fileID: 0}
+  m_enabledCrosshair: {fileID: 0}
 --- !u!1 &579118521
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,8 +621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffe6c14f054b624d8a61df503f21c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_targetedCrosshair: {fileID: 1900417511}
-  m_enabledCrosshair: {fileID: 441466907}
+  m_targetedCrosshair: {fileID: 0}
+  m_enabledCrosshair: {fileID: 0}
 --- !u!1 &584490639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,5 +1627,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffe6c14f054b624d8a61df503f21c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_targetedCrosshair: {fileID: 1013088443}
-  m_enabledCrosshair: {fileID: 615144621}
+  m_targetedCrosshair: {fileID: 0}
+  m_enabledCrosshair: {fileID: 0}
