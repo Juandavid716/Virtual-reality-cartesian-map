@@ -95,9 +95,7 @@
     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarLocalDriver.cs" />
     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarLogger.cs" />
     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarMaterialManager.cs" />
-    <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarMeshInstance.cs" />
     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarPacket.cs" />
-    <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarProjectorRenderComponent.cs" />
     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarRemoteDriver.cs" />
     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarRenderComponent.cs" />
     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSDKCAPI.cs" />
@@ -243,6 +241,7 @@
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\ShareMediaResult.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\SystemPermission.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\SystemVoipState.cs" />
+    <Compile Include="Assets\Oculus\Platform\Scripts\Models\Team.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\User.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\UserAndRoom.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\UserProof.cs" />
@@ -257,6 +256,7 @@
     <Compile Include="Assets\Oculus\Platform\Scripts\PlatformInternal.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\PlatformSettings.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Request.cs" />
+    <Compile Include="Assets\Oculus\Platform\Scripts\RichPresenceOptions.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\RoomJoinability.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\RoomJoinPolicy.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\RoomMembershipLockStatus.cs" />
@@ -353,6 +353,8 @@
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceModContext.cs" />
     <Compile Include="Assets\ScriptVr\Conexion.cs" />
     <Compile Include="Assets\ScriptVr\Linea.cs" />
+    <Compile Include="Assets\ScriptVr\LineDrawer.cs" />
+    <Compile Include="Assets\ScriptVr\Player.cs" />
     <Compile Include="Assets\ScriptVr\spawn.cs" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_PC_SingleComponent.shader" />
     <None Include="Assets\Oculus\Avatar\Samples\CrossPlatform\Readme.txt" />
