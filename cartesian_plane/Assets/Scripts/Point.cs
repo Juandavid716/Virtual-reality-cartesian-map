@@ -8,4 +8,5 @@ public struct Point
 	public Line AxisX;
 	public Line AxisY;
 	public TextMeshPro Text;
+   
 }

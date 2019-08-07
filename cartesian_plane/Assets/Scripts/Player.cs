@@ -44,6 +44,7 @@ public sealed class Player : MonoBehaviour
 			point.Text.transform.localPosition = position + new Vector2(1, 1);
 
 			Points.Add(point);
+            
 		}
 	}
 
