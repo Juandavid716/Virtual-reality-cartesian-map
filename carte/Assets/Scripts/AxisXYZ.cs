@@ -38,21 +38,21 @@ public class AxisXYZ : MonoBehaviour {
         // Draw lines
         GL.Begin(GL.LINES);
         //Draw X axis
-        GL.Color(Color.black);
+        GL.Color(Color.red);
         GL.Vertex3(0, 0, 0);
        
         GL.Vertex3(10.0f, 0.0f, 0.0f);
 
         //Draw -X axis
-        GL.Color(Color.black);
+        GL.Color(Color.red);
         GL.Vertex3(0, 0, 0);
         GL.Vertex3(-10.0f, 0.0f, 0.0f);
         //Draw Y axis
-        GL.Color(Color.black);
+        GL.Color(Color.red);
         GL.Vertex3(0, 0, 0);
         GL.Vertex3(0.0f, 10.0f, 0.0f);
         //Draw -Y axis
-        GL.Color(Color.black);
+        GL.Color(Color.red);
         GL.Vertex3(0, 0, 0);
         GL.Vertex3(0.0f, -10.0f, 0.0f);
         GL.End();
