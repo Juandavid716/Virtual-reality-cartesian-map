@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 
-public sealed class Player: MonoBehaviour
+public sealed class Player :MonoBehaviour
 {
 	public Camera Camera;
 	public Transform Plane;
@@ -13,29 +13,43 @@ public sealed class Player: MonoBehaviour
 	public Line OriginalAxisLine;
 	public GameObject OriginalDot;
 	public TextMeshPro OriginalText;
+  
+    public GameObject cursorPrefab;
+    public float maxCursorDistance = 30;
+    private GameObject cursorInstance;
     int contador = 0;
     int impar = 1;
     int indice = 0;
 	// TODO: This is unused
-	[NonSerialized] public List<Point> Points;
+	[NonSerialized] public List<Point1> Points;
 	[NonSerialized] public List<Line> Lines;
-   
+    public Transform mano;
+
+     void Start()
+    {  
+      
+        cursorInstance = Instantiate(cursorPrefab);
+    }
     void Awake()
 	{
-		Points = new List<Point>();
+		Points = new List<Point1>();
 		Lines = new List<Line>();
 	}
 
 	void Update()
 	{
+        UpdateCursor();
 		var mouse = Input.mousePosition;
-		var ray = Camera.ScreenPointToRay(mouse, Camera.MonoOrStereoscopicEye.Mono);
-		var position = Raycast(Plane.transform, ray.origin, ray.direction);
+        //var ray = Camera.ScreenPointToRay(mouse, Camera.MonoOrStereoscopicEye.Mono);
+        var ray = new Ray(mano.position, mano.forward);
+        var position = Raycast(Plane.transform, ray.origin, ray.direction);
 		Point.position = Plane.transform.TransformPoint(position);
-
-		if (Input.GetMouseButtonDown(0))
+    
+       
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
 		{
-			var point = new Point
+            Debug.DrawLine(mano.position, mano.forward);
+                var point = new Point1
 			{
 				Position = position,
 				Dot = Instantiate(OriginalDot, Plane, false),
@@ -86,10 +100,32 @@ public sealed class Player: MonoBehaviour
             }
 			
 		}
-	}
+        
+    }
+    private void UpdateCursor()
+    {
+        // Create a gaze ray pointing forward from the camera
+        Ray ray = new Ray(mano.position, mano.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            // If the ray hits something, set the position to the hit point
+            // and rotate based on the normal vector of the hit
+            cursorInstance.transform.position = hit.point;
+            cursorInstance.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        }
+        else
+        {
+            // If the ray doesn't hit anything, set the position to the maxCursorDistance
+            // and rotate to point away from the camera
+            cursorInstance.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
+            cursorInstance.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
+        }
+    }
 
 
-	public static Vector2 Raycast(
+
+    public static Vector2 Raycast(
 		Transform transform,
 		Vector3 origin,
 		Vector3 direction)
