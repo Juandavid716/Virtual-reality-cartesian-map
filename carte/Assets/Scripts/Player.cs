@@ -44,13 +44,12 @@ public sealed class Player :MonoBehaviour
         var ray = new Ray(mano.position, mano.forward);
         var position = Raycast(Plane.transform, ray.origin, ray.direction);
 		Point.position = Plane.transform.TransformPoint(position);
-    
-        
+
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && (contador==0 ||(contador % 2==0)))
 
         {
             UpdateCursor();
-            
+           
             mano = GameObject.Find("RightHandAnchor").transform;
             var point = new Point1
 			{
@@ -95,7 +94,7 @@ public sealed class Player :MonoBehaviour
                     line.BuildMesh(from, to);
                     line.gameObject.SetActive(true);
                 }
-
+                Debug.Log(Lines.Count);
                 for (var i = Points.Count; i < Lines.Count; i++)
                     Lines[i].gameObject.SetActive(false); //debug
                 impar = impar + 2;
@@ -159,7 +158,7 @@ public sealed class Player :MonoBehaviour
             }
 
         }
-        if(OVRInput.GetDown(OVRInput.Button.One) || OVRInput.GetDown(OVRInput.Button.Three))
+        if (OVRInput.GetDown(OVRInput.Button.One) || OVRInput.GetDown(OVRInput.Button.Three))
         {
             foreach (var item in Lines)
             {
@@ -172,11 +171,13 @@ public sealed class Player :MonoBehaviour
                 DestroyImmediate(item.AxisX);
                 DestroyImmediate(item.AxisY);
             }
-          
-           Lines.Clear();
-            Points.Clear();
-            Debug.Log(Points.Count);
 
+            Lines.Clear();
+            Points.Clear();
+          
+            contador = 0;
+            impar = 1;
+            indice = 0;
         }
     }
            
