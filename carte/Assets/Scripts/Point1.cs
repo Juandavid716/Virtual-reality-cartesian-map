@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct Point1
 {
-	public Vector2 Position;
+	public Vector3 Position;
 	public GameObject Dot;
 	public Line AxisX;
 	public Line AxisY;

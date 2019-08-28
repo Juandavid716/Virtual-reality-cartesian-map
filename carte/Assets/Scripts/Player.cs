@@ -43,19 +43,30 @@ public sealed class Player :MonoBehaviour
 
 	void Update()
 	{
+        Foo();
         UpdateCursor(mano,cursorInstance);
         UpdateCursor1(mano1, cursorInstanceD);
         var mouse = Input.mousePosition;
         //var ray = Camera.ScreenPointToRay(mouse, Camera.MonoOrStereoscopicEye.Mono);
+        //var ray = new Ray(mano.position, mano.forward);
+        var rotation = Quaternion.LookRotation(Plane.position - Camera.transform.position);
+       
+        var matrix = Matrix4x4.TRS(Camera.transform.position, rotation, Vector3.one);
         var ray = new Ray(mano.position, mano.forward);
-        var position = Raycast(Plane.transform, ray.origin, ray.direction);
-		Point.position = Plane.transform.TransformPoint(position);
+        var position = Raycast(matrix, ray.origin, ray.direction);
+        //var position = Raycast(Plane.transform, ray.origin, ray.direction);
+        Point.position = Plane.transform.TransformPoint(position);
 
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && (contador==0 ||(contador % 2==0)))
 
         {
+
              ray = new Ray(mano.position, mano.forward);
-             position = Raycast(Plane.transform, ray.origin, ray.direction);
+             
+             matrix = Matrix4x4.TRS(Camera.transform.position, rotation, Vector3.one);
+             position = Raycast(matrix, ray.origin, ray.direction);
+
+            //position = Raycast(Plane.transform, ray.origin, ray.direction);
             Point.position = Plane.transform.TransformPoint(position);
             UpdateCursor(mano, cursorInstance);
             UpdateCursor1(mano1, cursorInstanceD);
@@ -81,8 +92,8 @@ public sealed class Player :MonoBehaviour
 			point.Dot.transform.localPosition = position;
 			point.AxisX.BuildMesh(new Vector3(position.x, 0, 0), position);
 			point.AxisY.BuildMesh(new Vector3(0, position.y, 0), position);
-			point.Text.text = $"({position.x:0.0}, {position.y:0.0})";
-			point.Text.transform.localPosition = position + new Vector2(1, 1);
+			point.Text.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
+			point.Text.transform.localPosition = position + new Vector3(1, 1,1);
 
 			var index = 0;
 			//for (; index < Points.Count; index++)
@@ -125,7 +136,10 @@ public sealed class Player :MonoBehaviour
             UpdateCursor(mano, cursorInstance);
             UpdateCursor1(mano1, cursorInstanceD);
             ray = new Ray(mano1.position, mano1.forward);
-            position = Raycast(Plane.transform, ray.origin, ray.direction);
+    
+            matrix = Matrix4x4.TRS(Camera.transform.position, rotation, Vector3.one);
+             position = Raycast(matrix, ray.origin, ray.direction);
+            Raycast(matrix, ray.origin, ray.direction);
             Point.position = Plane.transform.TransformPoint(position);
             //mano = GameObject.Find("LeftHandAnchor").transform;
             var point = new Point1
@@ -139,8 +153,8 @@ public sealed class Player :MonoBehaviour
             point.Dot.transform.localPosition = position;
             point.AxisX.BuildMesh(new Vector3(position.x, 0, 0), position);
             point.AxisY.BuildMesh(new Vector3(0, position.y, 0), position);
-            point.Text.text = $"({position.x:0.0}, {position.y:0.0})";
-            point.Text.transform.localPosition = position + new Vector2(1, 1);
+            point.Text.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
+            point.Text.transform.localPosition = position + new Vector3(1, 1,1);
             foreach (var child in cursorInstanceD.GetComponentsInChildren<Renderer>())
             {
                 child.material.color = Color.gray;
@@ -266,6 +280,36 @@ public sealed class Player :MonoBehaviour
         }
     }
 
+
+    void Foo()
+    {
+    
+   
+
+
+        // TODO: figure out what the orientation should be
+       
+        //Debug.Log(position);
+       
+    }
+
+    public static Vector3 Raycast(
+    Matrix4x4 matrix,
+    Vector3 origin,
+    Vector3 direction)
+    {
+        var invMatrix = Matrix4x4.Inverse(matrix);
+        var localOrigin = invMatrix * origin;
+        var localDirection = invMatrix * direction;
+        var mul = localOrigin.z / localDirection.z;
+        var localPosition = new Vector2(
+        localOrigin.x - localDirection.x * mul,
+        localOrigin.y - localDirection.y * mul);
+
+        var worldPosition = matrix * localPosition;
+        return worldPosition;
+        //return transform.InverseTransformPoint(worldPosition);
+    }
 
     public static Vector2 Raycast(
 		Transform transform,

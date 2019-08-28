@@ -20,10 +20,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 579, y: 492}
-  m_MaxSize: {x: 14002, y: 18042}
+  m_MinSize: {x: 583, y: 513}
+  m_MaxSize: {x: 14004, y: 18063}
   vertical: 0
-  controlID: 3635
+  controlID: 2026
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -123,10 +123,10 @@ MonoBehaviour:
     y: 0
     width: 1275
     height: 947
-  m_MinSize: {x: 304, y: 492}
-  m_MaxSize: {x: 10002, y: 18042}
+  m_MinSize: {x: 306, y: 513}
+  m_MaxSize: {x: 10002, y: 18063}
   vertical: 1
-  controlID: 3636
+  controlID: 2027
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,10 +147,10 @@ MonoBehaviour:
     y: 0
     width: 1275
     height: 543
-  m_MinSize: {x: 304, y: 221}
-  m_MaxSize: {x: 8004, y: 8021}
+  m_MinSize: {x: 306, y: 242}
+  m_MaxSize: {x: 8006, y: 8042}
   vertical: 0
-  controlID: 3637
+  controlID: 2028
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,9 +203,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 5e290000
     m_LastClickedID: 0
-    m_ExpandedIDs: 3071ffffe4fbffff00000000
+    m_ExpandedIDs: dcfbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -249,10 +249,10 @@ MonoBehaviour:
     y: 0
     width: 873
     height: 543
-  m_MinSize: {x: 104, y: 221}
-  m_MaxSize: {x: 4004, y: 8021}
+  m_MinSize: {x: 104, y: 242}
+  m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 3638
+  controlID: 2029
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 873
     height: 357
-  m_MinSize: {x: 104, y: 121}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 9}
@@ -545,20 +545,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Models/Point
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 57
   m_LastFolders:
-  - Assets/Models/Point
+  - Assets/Scripts
   m_LastFoldersGridSize: 57
   m_LastProjectPath: C:\Users\uta\Desktop\virtual-reality\carte
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2a370000
-    m_LastClickedID: 14122
-    m_ExpandedIDs: 000000004e2e000088340000b63400007a4200007c42000000ca9a3b
+    m_SelectedIDs: 682e0000
+    m_LastClickedID: 11880
+    m_ExpandedIDs: 00000000542e00008e340000bc340000944200009642000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -586,7 +586,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004e2e000088340000b63400007a4200007c42000000ca9a3b
+    m_ExpandedIDs: 00000000542e00008e340000bc340000944200009642000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -611,8 +611,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 5e290000
+    m_LastClickedInstanceID: 10590
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: b82000002a0500002e050000840500008a1c000030050000a4050000681c0000021e0000be2400006c1c000000000000ea410000
     m_RenameOverlay:
