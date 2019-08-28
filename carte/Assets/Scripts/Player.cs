@@ -15,8 +15,10 @@ public sealed class Player :MonoBehaviour
 	public TextMeshPro OriginalText;
 
     public GameObject cursorPrefab;
+    public GameObject cursorPrefabGray;
     public float maxCursorDistance = 30;
     private GameObject cursorInstance;
+    private GameObject cursorInstanceD;
     int contador = 0;
     int impar = 1;
     int indice = 0;
@@ -24,11 +26,14 @@ public sealed class Player :MonoBehaviour
 	[NonSerialized] public List<Point1> Points;
     [NonSerialized] public  List<Line> Lines;
      Transform mano;
+    Transform mano1;
 
      void Start()
     {
         mano = GameObject.Find("LeftHandAnchor").transform;
+        mano1 = GameObject.Find("RightHandAnchor").transform;
         cursorInstance = Instantiate(cursorPrefab);
+        cursorInstanceD = Instantiate(cursorPrefabGray);
     }
     void Awake()
 	{
@@ -38,8 +43,9 @@ public sealed class Player :MonoBehaviour
 
 	void Update()
 	{
-        UpdateCursor();
-		var mouse = Input.mousePosition;
+        UpdateCursor(mano,cursorInstance);
+        UpdateCursor1(mano1, cursorInstanceD);
+        var mouse = Input.mousePosition;
         //var ray = Camera.ScreenPointToRay(mouse, Camera.MonoOrStereoscopicEye.Mono);
         var ray = new Ray(mano.position, mano.forward);
         var position = Raycast(Plane.transform, ray.origin, ray.direction);
@@ -48,9 +54,22 @@ public sealed class Player :MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && (contador==0 ||(contador % 2==0)))
 
         {
-            UpdateCursor();
-           
-            mano = GameObject.Find("RightHandAnchor").transform;
+             ray = new Ray(mano.position, mano.forward);
+             position = Raycast(Plane.transform, ray.origin, ray.direction);
+            Point.position = Plane.transform.TransformPoint(position);
+            UpdateCursor(mano, cursorInstance);
+            UpdateCursor1(mano1, cursorInstanceD);
+            //mano = GameObject.Find("RightHandAnchor").transform;
+            foreach (var child in cursorInstanceD.GetComponentsInChildren<Renderer>())
+            {
+                child.material.color = Color.red;
+
+            }
+            foreach (var child in cursorInstance.GetComponentsInChildren<Renderer>())
+            {
+                child.material.color = Color.gray;
+
+            }
             var point = new Point1
 			{
 				Position = position,
@@ -103,8 +122,12 @@ public sealed class Player :MonoBehaviour
 			
 		} else if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger)&&  (contador % 2 != 0))
         {
-            UpdateCursor();
-            mano = GameObject.Find("LeftHandAnchor").transform;
+            UpdateCursor(mano, cursorInstance);
+            UpdateCursor1(mano1, cursorInstanceD);
+            ray = new Ray(mano1.position, mano1.forward);
+            position = Raycast(Plane.transform, ray.origin, ray.direction);
+            Point.position = Plane.transform.TransformPoint(position);
+            //mano = GameObject.Find("LeftHandAnchor").transform;
             var point = new Point1
             {
                 Position = position,
@@ -118,7 +141,16 @@ public sealed class Player :MonoBehaviour
             point.AxisY.BuildMesh(new Vector3(0, position.y, 0), position);
             point.Text.text = $"({position.x:0.0}, {position.y:0.0})";
             point.Text.transform.localPosition = position + new Vector2(1, 1);
+            foreach (var child in cursorInstanceD.GetComponentsInChildren<Renderer>())
+            {
+                child.material.color = Color.gray;
 
+            }
+            foreach (var child in cursorInstance.GetComponentsInChildren<Renderer>())
+            {
+                child.material.color = Color.red;
+
+            }
             var index = 0;
             //for (; index < Points.Count; index++)
             //{
@@ -178,31 +210,61 @@ public sealed class Player :MonoBehaviour
             contador = 0;
             impar = 1;
             indice = 0;
+            foreach (var child in cursorInstanceD.GetComponentsInChildren<Renderer>())
+            {
+                child.material.color = Color.gray;
+
+            }
+            foreach (var child in cursorInstance.GetComponentsInChildren<Renderer>())
+            {
+                child.material.color = Color.red;
+
+            }
         }
     }
            
-    private void UpdateCursor()
+    private void UpdateCursor(Transform manoinstantiate, GameObject cursorInstancia)
     {
     
-        Ray ray = new Ray(mano.position, mano.forward);
+        Ray ray = new Ray(manoinstantiate.position, manoinstantiate.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             // If the ray hits something, set the position to the hit point
             // and rotate based on the normal vector of the hit
-            cursorInstance.transform.position = hit.point;
-            cursorInstance.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            cursorInstancia.transform.position = hit.point;
+            cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         }
         else
         {
             // If the ray doesn't hit anything, set the position to the maxCursorDistance
             // and rotate to point away from the camera
-            cursorInstance.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
-            cursorInstance.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
+            cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
+            cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
         }
     }
+    private void UpdateCursor1(Transform manoinstantiate, GameObject cursorInstancia)
+    {
 
+        Ray ray = new Ray(manoinstantiate.position, manoinstantiate.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            // If the ray hits something, set the position to the hit point
+            // and rotate based on the normal vector of the hit
+            cursorInstancia.transform.position = hit.point;
+            cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        }
+        else
+        {
+            // If the ray doesn't hit anything, set the position to the maxCursorDistance
+            // and rotate to point away from the camera
+            cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
+            cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
+        }
+    }
 
 
     public static Vector2 Raycast(
