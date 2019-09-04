@@ -841,6 +841,8 @@ MonoBehaviour:
     type: 2}
   OriginalText: {fileID: 6579136766005869907, guid: 6d4320ef84d6dd340a4d866f9496968d,
     type: 2}
+  Text1: {fileID: 6579136766005869907, guid: 6d4320ef84d6dd340a4d866f9496968d, type: 2}
+  Text2: {fileID: 6579136766005869907, guid: 6d4320ef84d6dd340a4d866f9496968d, type: 2}
   cursorPrefab: {fileID: 1738180818937812, guid: 9e7a97afdafa1b24da9ea0e220bbcff6,
     type: 2}
   cursorPrefabGray: {fileID: 1696251192464786, guid: e98be88cadcaa4e418357d478637c032,
