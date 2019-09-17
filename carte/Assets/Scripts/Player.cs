@@ -20,6 +20,8 @@ public sealed class Player :MonoBehaviour
     public GameObject cursorPrefab;
     public GameObject cursorPrefabGray;
     public float maxCursorDistance = 4f;
+     Vector3 PositionCursor1;
+     Vector3 PositionCursor2;
     private GameObject cursorInstance;
     private GameObject cursorInstanceD;
     int contador = 0;
@@ -31,7 +33,9 @@ public sealed class Player :MonoBehaviour
      Transform mano;
     Transform mano1;
 
-     void Start()
+    
+
+    void Start()
     {
         mano = GameObject.Find("LeftHandAnchor").transform;
         mano1 = GameObject.Find("RightHandAnchor").transform;
@@ -52,16 +56,18 @@ public sealed class Player :MonoBehaviour
         
         //var ray = Camera.ScreenPointToRay(mouse, Camera.MonoOrStereoscopicEye.Mono);
         //var ray = new Ray(mano.position, mano.forward);
-        var rotation = Quaternion.LookRotation(Plane.position - mano.transform.position);
-       var rotation1 = Quaternion.LookRotation(Plane.position - mano1.transform.position);
-        var matrix = Matrix4x4.TRS(Camera.transform.position, rotation, Vector3.one);
-        var matrix1 = Matrix4x4.TRS(Camera.transform.position, rotation1, Vector3.one);
+       // var rotation = Quaternion.LookRotation(Plane.position- Camera.transform.position);
+       //var rotation1 = Quaternion.LookRotation(Plane.position - Camera.transform.position);
+       // var matrix = Matrix4x4.TRS(Camera.transform.position, rotation, Vector3.one);
+       // var matrix1 = Matrix4x4.TRS(Camera.transform.position, rotation1, Vector3.one);
         var ray = new Ray(mano.position, mano.forward);
         var ray1 = new Ray(mano1.position, mano1.forward);
-        var position = Raycast(matrix, ray.origin, ray.direction);
-        var position1 = Raycast(matrix1, ray1.origin, ray1.direction);
-        UpdateCursor(mano, cursorInstance, position);
-        UpdateCursor1(mano1, cursorInstanceD, position1);
+        //var position = Raycast(matrix, ray.origin, ray.direction);
+        //var position1 = Raycast(matrix1, ray1.origin, ray1.direction);
+        UpdateCursor(mano, cursorInstance);
+         UpdateCursor1(mano1, cursorInstanceD);
+        var position = PositionCursor1;
+        var position1 = PositionCursor2;
         //var position = Raycast(Plane.transform, ray.origin, ray.direction);
         Point.position = Plane.transform.TransformPoint(position);
 
@@ -69,17 +75,19 @@ public sealed class Player :MonoBehaviour
 
         {
 
-             rotation = Quaternion.LookRotation(Plane.position - mano.transform.position);
+            // rotation = Quaternion.LookRotation(Plane.position - Camera.transform.position );
 
-            ray = new Ray(mano.position, mano.forward);
+            //ray = new Ray(mano.position, mano.forward);
              
-             matrix = Matrix4x4.TRS(Camera.transform.position, rotation, Vector3.one);
-             position = Raycast(matrix, ray.origin, ray.direction);
+            // matrix = Matrix4x4.TRS(Camera.transform.position, rotation, Vector3.one);
+            // position = Raycast(matrix, ray.origin, ray.direction);
 
             //position = Raycast(Plane.transform, ray.origin, ray.direction);
+      
+           UpdateCursor(mano, cursorInstance);
+          UpdateCursor1(mano1, cursorInstanceD);
+            position = PositionCursor1;
             Point.position = Plane.transform.TransformPoint(position);
-            UpdateCursor(mano, cursorInstance, position);
-            UpdateCursor1(mano1, cursorInstanceD, position1);
             //mano = GameObject.Find("RightHandAnchor").transform;
             foreach (var child in cursorInstanceD.GetComponentsInChildren<Renderer>())
             {
@@ -146,14 +154,14 @@ public sealed class Player :MonoBehaviour
 			
 		} else if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger)&&  (contador % 2 != 0))
         {
-             rotation1 = Quaternion.LookRotation(Plane.position - mano1.transform.position);
+            
             ray1 = new Ray(mano1.position, mano1.forward);
     
-            matrix1 = Matrix4x4.TRS(Camera.transform.position, rotation1, Vector3.one);
-             position1 = Raycast(matrix1, ray1.origin, ray1.direction);
-            UpdateCursor(mano, cursorInstance, position);
-            UpdateCursor1(mano1, cursorInstanceD, position1);
-       
+           
+             //position1 = Raycast(matrix1, ray1.origin, ray1.direction);
+            UpdateCursor(mano, cursorInstance);
+            UpdateCursor1(mano1, cursorInstanceD);
+             position1 = PositionCursor2;
             Point.position = Plane.transform.TransformPoint(position1);
             //mano = GameObject.Find("LeftHandAnchor").transform;
             var point = new Point1
@@ -250,38 +258,41 @@ public sealed class Player :MonoBehaviour
             }
         }
     }
-           
-    private void UpdateCursor(Transform manoinstantiate, GameObject cursorInstancia, Vector3 position)
+    
+    void UpdateCursor(Transform manoinstantiate, GameObject cursorInstancia)
     {
-        m_Text.fontSize = 6;
+        m_Text.fontSize = 4;
         
         //m_Text.transform.localPosition = position;
         Ray ray = new Ray(manoinstantiate.position, manoinstantiate.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+       Vector3 position = new Vector3(0,0,0);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity,11))
         {
             // If the ray hits something, set the position to the hit point
             // and rotate based on the normal vector of the hit
-            cursorInstancia.transform.position = hit.point;
+            position = hit.point;
+            cursorInstancia.transform.position =position;
             m_Text.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
             cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            m_Text.transform.localPosition = hit.point;
+            m_Text.transform.localPosition = position;
             m_Text.transform.localRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         }
         else
-        {
-            // If the ray doesn't hit anything, set the position to the maxCursorDistance
-            // and rotate to point away from the camera
-            cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
-            //Debug.Log(new Vector3(position.x,position.y,position.z));
-            m_Text.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
-            cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
-            m_Text.transform.localPosition = ray.origin + ray.direction.normalized * maxCursorDistance;
-            m_Text.transform.localRotation = Quaternion.FromToRotation(new Vector3(0,0,0), ray.direction);
-        }
+        //{
+        //    // If the ray doesn't hit anything, set the position to the maxCursorDistance
+        //    // and rotate to point away from the camera
+        cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
+        //    //Debug.Log(new Vector3(position.x,position.y,position.z));
+        //    m_Text.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
+        cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
+        //    m_Text.transform.localPosition = ray.origin + ray.direction.normalized * maxCursorDistance;
+        //    m_Text.transform.localRotation = Quaternion.FromToRotation(new Vector3(0,0,0), ray.direction);
+        //}
+        PositionCursor1 = position;
     }
-    private void UpdateCursor1(Transform manoinstantiate, GameObject cursorInstancia, Vector3 position)
+    void UpdateCursor1(Transform manoinstantiate, GameObject cursorInstancia)
     {
         //m_Text1.fontSize = 12;
         
@@ -289,43 +300,33 @@ public sealed class Player :MonoBehaviour
    
         Ray ray = new Ray(manoinstantiate.position, manoinstantiate.forward);
         RaycastHit hit;
-        m_Text1.fontSize = 6;
-       
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        m_Text1.fontSize = 4;
+        Vector3 position = new Vector3(0, 0, 0);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity,11))
         {
             // If the ray hits something, set the position to the hit point
             // and rotate based on the normal vector of the hit
-            cursorInstancia.transform.position = hit.point;
-            //m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
+            position = hit.point;
+            cursorInstancia.transform.position =position;
+            m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
             cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-
+            m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
             m_Text1.transform.localPosition = hit.point;
             m_Text1.transform.localRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         }
         else
         {
-            // If the ray doesn't hit anything, set the position to the maxCursorDistance
-            // and rotate to point away from the camera
-            cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
-            cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
-             m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
-            m_Text1.transform.localPosition = ray.origin + ray.direction.normalized * maxCursorDistance;
-            m_Text1.transform.localRotation = Quaternion.FromToRotation(new Vector3(0, 0, 0), ray.direction);
+        //    If the ray doesn't hit anything, set the position to the maxCursorDistance
+        //     and rotate to point away from the camera
+          cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
+         cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
+        //    m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
+        //    m_Text1.transform.localPosition = ray.origin + ray.direction.normalized * maxCursorDistance;
+        //    m_Text1.transform.localRotation = Quaternion.FromToRotation(new Vector3(0, 0, 0), ray.direction);
         }
+        PositionCursor2 = position;
     }
 
-
-    void Foo()
-    {
-    
-   
-
-
-        // TODO: figure out what the orientation should be
-       
-        //Debug.Log(position);
-       
-    }
 
     public static Vector3 Raycast(
     Matrix4x4 matrix,
