@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33830722788937678}
   - component: {fileID: 23106824405941602}
   - component: {fileID: 135319890966847560}
+  - component: {fileID: 114429566105407396}
   m_Layer: 0
   m_Name: puntito
-  m_TagString: Puntito
+  m_TagString: PuntoGrande
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039242222643056}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114429566105407396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039242222643056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db86191ae79ec8748926a023defc0b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135319890966847560
 SphereCollider:
   m_ObjectHideFlags: 1

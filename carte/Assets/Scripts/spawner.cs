@@ -21,14 +21,15 @@ public class spawner : MonoBehaviour {
                 }
             }
         }
-        //Physics.IgnoreLayerCollision(9, 10);
+      
 
     }
 
-    
 
+ 
     // Update is called once per frame
     void Update () {
     
 	}
+  
 }

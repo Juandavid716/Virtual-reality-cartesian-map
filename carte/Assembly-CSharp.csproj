@@ -350,6 +350,8 @@
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceMod.cs" />
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceModContext.cs" />
     <Compile Include="Assets\Scripts\AxisXYZ.cs" />
+    <Compile Include="Assets\Scripts\coli.cs" />
+    <Compile Include="Assets\Scripts\colliderscript.cs" />
     <Compile Include="Assets\Scripts\Line.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Point1.cs" />

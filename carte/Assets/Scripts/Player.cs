@@ -87,6 +87,7 @@ public sealed class Player :MonoBehaviour
            UpdateCursor(mano, cursorInstance);
           UpdateCursor1(mano1, cursorInstanceD);
             position = PositionCursor1;
+            position1 = PositionCursor2;
             Point.position = Plane.transform.TransformPoint(position);
             //mano = GameObject.Find("RightHandAnchor").transform;
             foreach (var child in cursorInstanceD.GetComponentsInChildren<Renderer>())
@@ -162,6 +163,7 @@ public sealed class Player :MonoBehaviour
             UpdateCursor(mano, cursorInstance);
             UpdateCursor1(mano1, cursorInstanceD);
              position1 = PositionCursor2;
+            position = PositionCursor1;
             Point.position = Plane.transform.TransformPoint(position1);
             //mano = GameObject.Find("LeftHandAnchor").transform;
             var point = new Point1
@@ -272,25 +274,32 @@ public sealed class Player :MonoBehaviour
         {
             // If the ray hits something, set the position to the hit point
             // and rotate based on the normal vector of the hit
+            m_Text.gameObject.SetActive(true);
             position = hit.point;
             cursorInstancia.transform.position =position;
             m_Text.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
             cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            m_Text.transform.localPosition = position;
-            m_Text.transform.localRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            m_Text.transform.localPosition = position+ new Vector3(1, 1, 1);
+            m_Text.transform.localRotation = Quaternion.FromToRotation(new Vector3(0, 0, 0), hit.normal);
+            PositionCursor1 = position;
         }
         else
-        //{
+        {
         //    // If the ray doesn't hit anything, set the position to the maxCursorDistance
         //    // and rotate to point away from the camera
         cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
         //    //Debug.Log(new Vector3(position.x,position.y,position.z));
         //    m_Text.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
         cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
+            if (m_Text.isActiveAndEnabled == true)
+            {
+                m_Text.gameObject.SetActive(false);
+            }
+     
         //    m_Text.transform.localPosition = ray.origin + ray.direction.normalized * maxCursorDistance;
         //    m_Text.transform.localRotation = Quaternion.FromToRotation(new Vector3(0,0,0), ray.direction);
-        //}
-        PositionCursor1 = position;
+        }
+       
     }
     void UpdateCursor1(Transform manoinstantiate, GameObject cursorInstancia)
     {
@@ -306,13 +315,15 @@ public sealed class Player :MonoBehaviour
         {
             // If the ray hits something, set the position to the hit point
             // and rotate based on the normal vector of the hit
+            m_Text1.gameObject.SetActive(true);
             position = hit.point;
             cursorInstancia.transform.position =position;
             m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
             cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
-            m_Text1.transform.localPosition = hit.point;
-            m_Text1.transform.localRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+       
+            m_Text1.transform.localPosition = hit.point + new Vector3(1, 1, 1);
+            m_Text1.transform.localRotation = Quaternion.FromToRotation(new Vector3(0, 0, 0), hit.normal);
+            PositionCursor2 = position;
         }
         else
         {
@@ -320,11 +331,15 @@ public sealed class Player :MonoBehaviour
         //     and rotate to point away from the camera
           cursorInstancia.transform.position = ray.origin + ray.direction.normalized * maxCursorDistance;
          cursorInstancia.transform.rotation = Quaternion.FromToRotation(Vector3.up, -ray.direction);
-        //    m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
-        //    m_Text1.transform.localPosition = ray.origin + ray.direction.normalized * maxCursorDistance;
-        //    m_Text1.transform.localRotation = Quaternion.FromToRotation(new Vector3(0, 0, 0), ray.direction);
+            if (m_Text1.isActiveAndEnabled == true)
+            {
+                m_Text1.gameObject.SetActive(false);
+            }
+            //    m_Text1.text = $"({position.x:0.0}, {position.y:0.0},{position.z:0.0})";
+            //    m_Text1.transform.localPosition = ray.origin + ray.direction.normalized * maxCursorDistance;
+            //    m_Text1.transform.localRotation = Quaternion.FromToRotation(new Vector3(0, 0, 0), ray.direction);
         }
-        PositionCursor2 = position;
+      
     }
 
 
