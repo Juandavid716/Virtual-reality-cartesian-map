@@ -17,7 +17,7 @@ public class spawner : MonoBehaviour {
                 for (int k = -5; k < count; k++)
                 {
                     Instantiate(spawnObject, new Vector3(i, j, k), new Quaternion(0, 0, 0, 0));
-
+                    spawnObject.GetComponent<Renderer>().enabled = false;
                 }
             }
         }
