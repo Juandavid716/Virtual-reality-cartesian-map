@@ -6,6 +6,8 @@ public class spawner : MonoBehaviour {
     private int count = 5;
     public GameObject spawnObject;
     public Collider playerControl;
+    public GameObject ParentPlane;
+
 	// Use this for initialization
 	void Start () {
         for (int i = -5; i < count; i++)
@@ -18,15 +20,25 @@ public class spawner : MonoBehaviour {
                 {
                     Instantiate(spawnObject, new Vector3(i, j, k), new Quaternion(0, 0, 0, 0));
                     spawnObject.GetComponent<Renderer>().enabled = false;
+                   
                 }
             }
         }
+        disappearPlane(ParentPlane);
+       
       
+    }
+
+    void disappearPlane(GameObject ParentP)
+    {
+        for (int i = 0; i < ParentP.transform.childCount; i++)
+        {
+            var childplane = ParentP.transform.GetChild(i);
+            childplane.GetComponent<Renderer>().enabled = false;
+        }
 
     }
 
-
- 
     // Update is called once per frame
     void Update () {
     
