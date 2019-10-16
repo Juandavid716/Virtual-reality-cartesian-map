@@ -24,21 +24,12 @@ public class spawner : MonoBehaviour {
                 }
             }
         }
-        disappearPlane(ParentPlane);
+
        
       
     }
 
-    void disappearPlane(GameObject ParentP)
-    {
-        for (int i = 0; i < ParentP.transform.childCount; i++)
-        {
-            var childplane = ParentP.transform.GetChild(i);
-            childplane.GetComponent<Renderer>().enabled = false;
-        }
-
-    }
-
+    
     // Update is called once per frame
     void Update () {
     

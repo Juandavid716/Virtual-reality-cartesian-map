@@ -23,7 +23,9 @@ public sealed class Player :MonoBehaviour
      Vector3 PositionCursor1;
      Vector3 PositionCursor2;
     private GameObject cursorInstance;
+    private Vector3 moveDirection = Vector3.zero;
     private GameObject cursorInstanceD;
+    public CharacterController personaje;
     int contador = 0;
     int impar = 1;
     int indice = 0;
@@ -230,6 +232,11 @@ public sealed class Player :MonoBehaviour
         }
         if (OVRInput.GetDown(OVRInput.Button.One) || OVRInput.GetDown(OVRInput.Button.Three))
         {
+            personaje.enabled = false;
+            personaje.transform.position = new Vector3(1,2,-7.28f);
+            personaje.enabled = true;
+            //moveDirection = new Vector3(0, 0, 0);
+            //personaje.Move(moveDirection);
             foreach (var item in Lines)
             {
                 DestroyImmediate(item);
@@ -373,4 +380,6 @@ public sealed class Player :MonoBehaviour
 			localOrigin.x - localDirection.x * mul,
 			localOrigin.y - localDirection.y * mul);
 	}
+
+   
 }
