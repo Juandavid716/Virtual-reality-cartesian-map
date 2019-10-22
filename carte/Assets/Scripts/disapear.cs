@@ -16,7 +16,7 @@ public class disapear : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (OVRInput.GetDown(OVRInput.Button.Three))
+        if (OVRInput.GetDown(OVRInput.Button.One))
         {
             Movement(0);
         }
@@ -38,10 +38,13 @@ public class disapear : MonoBehaviour {
         if (floor == 0)
         {
             //personaje.transform.position = new Vector3(0, 10, 0);
-        } else if (floor==0 && OVRInput.GetDown(OVRInput.Button.Four))
-        {
-            Debug.Log("sirvio" + personaje.transform);
-        }
+            personaje.enabled = false;
+            personaje.transform.position = new Vector3(personaje.transform.position.x, 6, personaje.transform.position.z);
+            personaje.enabled = true;
+        } 
+        //{
+        //    Debug.Log("sirvio" + personaje.transform);
+        //}
     }
 
     void allchildfloor(GameObject allf)
