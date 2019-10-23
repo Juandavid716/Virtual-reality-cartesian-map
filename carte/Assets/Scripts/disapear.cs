@@ -16,10 +16,10 @@ public class disapear : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (OVRInput.GetDown(OVRInput.Button.One))
-        {
-            Movement(0);
-        }
+        //if (OVRInput.GetDown(OVRInput.Button.One))
+        //{
+        //    Movement(0);
+        //}
        
 	}
 
