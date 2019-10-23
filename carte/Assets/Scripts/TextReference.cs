@@ -3,13 +3,17 @@ using System.Collections;
 using TMPro; // Add the TextMesh Pro namespace to access the various functions.
 
 
-public struct TextReference 
+public class TextReference : MonoBehaviour
 {
 
-    public TextMeshPro m_Text;
-    private TextContainer m_TextContainer;
-    
+    void Update()
+    {
+        Vector3 camPos = Camera.main.transform.position;
 
+        transform.LookAt(
+            new Vector3(-camPos.x, transform.position.y, -camPos.z)
+            );
 
+    }
    
 }

@@ -230,7 +230,7 @@ public sealed class Player :MonoBehaviour
             }
 
         }
-        if (OVRInput.GetDown(OVRInput.Button.One) || OVRInput.GetDown(OVRInput.Button.Three))
+        if (OVRInput.GetDown(OVRInput.Button.Four) || OVRInput.GetDown(OVRInput.Button.Three))
         {
           
             foreach (var item in Lines)
