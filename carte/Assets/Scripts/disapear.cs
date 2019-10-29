@@ -66,16 +66,13 @@ public class disapear : MonoBehaviour {
 
     void allchildfloor(GameObject allf)
     {
-        for (int i = 0; i < VectoresHijos.Length; i++)
-        {
-            VectoresHijos[i] = null;
-        }
+        
        
         for (int i = 0; i < allf.transform.childCount; i++)
         {
             VectoresHijos[i] = allf.transform.GetChild(i);
-            //disappearPlane(VectoresHijos[i].gameObject);
-            Debug.Log("el piso es " + VectoresHijos[i].transform.position.y);
+         
+           
         }
         
     }

@@ -25,7 +25,7 @@ public sealed class Player :MonoBehaviour
     private GameObject cursorInstance;
     private Vector3 moveDirection = Vector3.zero;
     private GameObject cursorInstanceD;
-
+    public Vector3 camPos;
     int contador = 0;
     int impar = 1;
     int indice = 0;
@@ -45,6 +45,8 @@ public sealed class Player :MonoBehaviour
         cursorInstanceD = Instantiate(cursorPrefabGray);
         m_Text = Instantiate(Text1);
         m_Text1 = Instantiate(Text2);
+        camPos = Camera.main.transform.position;
+
     }
     void Awake()
 	{
@@ -271,8 +273,8 @@ public sealed class Player :MonoBehaviour
         //m_Text.transform.localPosition = position;
         Ray ray = new Ray(manoinstantiate.position, manoinstantiate.forward);
         RaycastHit hit;
-
-       Vector3 position = new Vector3(0,0,0);
+       
+        Vector3 position = new Vector3(0,0,0);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity,11))
         {
             // If the ray hits something, set the position to the hit point
